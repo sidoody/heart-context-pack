@@ -29,7 +29,7 @@ In a prompt engineering workflow, the instinct is to reach for a more powerful m
 - Conflicting instructions around STEMI bypass overrides
 - Missing safety-flag instructions in the system prompt
 
-Once those logic gaps were closed in the source artifacts, the rerun achieved 14/14 perfect (mean 8.00/8). The system became stable because the specification became internally coherent.
+Once those logic gaps were closed in the source artifacts, the rerun achieved 14/14 perfect. The system became stable because the specification became internally coherent.
 
 A worked example of this iteration is in `examples/case_walkthrough.md`.
 
