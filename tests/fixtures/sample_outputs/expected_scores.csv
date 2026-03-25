@@ -1,0 +1,4 @@
+case_id,split,title,structured_0_6,forbidden_0_2,total_0_8,failure_class,notes
+case_005,canonical,Low total with markedly elevated troponin,6,2,8,pack_contradiction,
+holdout_003,holdout,Low HEART total but troponin greater than three times ULN,6,2,8,none,
+messy_002,messy_note,Out-of-order ED note with pending troponin,6,2,8,none,

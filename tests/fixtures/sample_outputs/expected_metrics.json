@@ -1,0 +1,35 @@
+{
+  "mean": 8,
+  "median": 8,
+  "min": 8,
+  "max": 8,
+  "pass_rate_ge_6": 1.0,
+  "pass_rate_ge_7": 1.0,
+  "case_count": 3,
+  "predicted_count": 3,
+  "slices_used": [
+    "canonical",
+    "holdout",
+    "messy_note"
+  ],
+  "case_counts_by_split": {
+    "canonical": 1,
+    "holdout": 1,
+    "messy_note": 1
+  },
+  "failure_class_counts": {
+    "none": 2,
+    "pack_contradiction": 1
+  },
+  "failure_class_counts_by_split": {
+    "canonical": {
+      "pack_contradiction": 1
+    },
+    "holdout": {
+      "none": 1
+    },
+    "messy_note": {
+      "none": 1
+    }
+  }
+}

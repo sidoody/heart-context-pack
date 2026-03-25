@@ -1,0 +1,70 @@
+pack_name: heart-score-context-pack
+pack_version: 1.0.0
+source_rule: "HEART Score (Backus et al. 2010; Six et al. 2008)"
+population_scope:
+  include:
+    - adults age 18 and older presenting to the emergency department with acute chest pain
+    - HEART Score risk stratification for major adverse cardiac events
+  exclude:
+    - STEMI on initial ECG
+    - hemodynamic instability or cardiac arrest
+    - trauma-related chest pain
+    - pediatric patients
+    - patients already admitted for ACS workup
+
+heart_score_components:
+  history: { min: 0, max: 2 }
+  ecg: { min: 0, max: 2 }
+  age: { min: 0, max: 2 }
+  risk_factors: { min: 0, max: 2 }
+  troponin: { min: 0, max: 2 }
+
+recognized_risk_factors:
+  - hypertension
+  - hyperlipidemia or dyslipidemia
+  - diabetes mellitus
+  - obesity (BMI > 30)
+  - current smoking or quit within 3 months
+  - family history of premature CAD (first-degree male < 55, female < 65)
+  - active cocaine or amphetamine use
+
+atherosclerotic_disease_qualifiers:
+  - prior myocardial infarction
+  - prior PCI or CABG
+  - prior ischemic stroke or TIA
+  - peripheral arterial disease
+  - known CAD on prior angiography
+
+score_interpretation:
+  low_risk:
+    range: "0-3"
+    disposition: consider early discharge with outpatient follow-up
+    condition: serial troponins negative and no safety flags
+  moderate_risk:
+    range: "4-6"
+    disposition: admit for observation, serial troponins, and further workup
+  high_risk:
+    range: "7-10"
+    disposition: admit, early cardiology consultation, consider invasive strategy
+
+core_rules:
+  - id: stemi_bypass
+    rule: If ECG shows STEMI, HEART Score does not apply. Set heart_applicable to false. Route to emergent cath lab.
+  - id: hemodynamic_bypass
+    rule: If patient is hemodynamically unstable, HEART Score does not apply. Set heart_applicable to false. Route to emergent stabilization.
+  - id: score_arithmetic
+    rule: Total HEART Score equals the sum of History + ECG + Age + Risk Factors + Troponin. Each component is 0, 1, or 2. Maximum total is 10.
+  - id: low_risk_discharge
+    rule: Score 0-3 with negative serial troponins and no safety flags supports early discharge consideration.
+  - id: troponin_safety_override
+    rule: If total score is 0-3 but Troponin component is 2, flag as safety concern (troponin_2_with_low_total) before recommending early discharge.
+  - id: incomplete_troponin
+    rule: If troponin result is pending or not drawn, the score cannot be finalized. Flag as pending_troponin in safety_flags.
+  - id: serial_troponin_requirement
+    rule: Low-risk patients considered for early discharge require completed serial troponins (typically 0 and 3-6 hour draws) before discharge.
+  - id: moderate_risk_workup
+    rule: Score 4-6 warrants admission for observation, serial troponins, and non-invasive testing or coronary CT angiography.
+  - id: high_risk_escalation
+    rule: Score 7-10 warrants admission, early cardiology consultation, and consideration of invasive strategy.
+  - id: risk_factor_atherosclerotic_override
+    rule: Known atherosclerotic disease automatically sets Risk Factor component to 2 regardless of other risk factor count.

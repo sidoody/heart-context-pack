@@ -1,0 +1,4 @@
+total_score_range,risk_tier,recommended_disposition,requires_serial_troponins,cardiology_consult
+0-3,low,early_discharge_consideration,yes_before_discharge,no
+4-6,moderate,admit_observation_workup,yes,consider
+7-10,high,admit_invasive_strategy,yes,yes

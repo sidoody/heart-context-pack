@@ -1,0 +1,6 @@
+scope,split,failure_class,count
+overall,all,none,2
+overall,all,pack_contradiction,1
+split,canonical,pack_contradiction,1
+split,holdout,none,1
+split,messy_note,none,1

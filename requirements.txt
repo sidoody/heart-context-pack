@@ -1,0 +1,5 @@
+anthropic==0.86.0
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+python-dotenv==1.2.2
+PyYAML==6.0.3

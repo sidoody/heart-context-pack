@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.venv/
+runs/
+__pycache__/
+*.pyc
+.DS_Store
+context_bundle.md
+rendered_context_bundle.md

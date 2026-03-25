@@ -1,0 +1,17 @@
+{
+  "overall": {
+    "none": 2,
+    "pack_contradiction": 1
+  },
+  "by_split": {
+    "canonical": {
+      "pack_contradiction": 1
+    },
+    "holdout": {
+      "none": 1
+    },
+    "messy_note": {
+      "none": 1
+    }
+  }
+}

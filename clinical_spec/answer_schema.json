@@ -1,0 +1,97 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "heart_applicable",
+    "history_score",
+    "ecg_score",
+    "age_score",
+    "risk_factor_score",
+    "troponin_score",
+    "total_heart_score",
+    "risk_tier",
+    "recommended_disposition",
+    "safety_flags",
+    "key_missing_information",
+    "clinician_rationale"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "heart_applicable": {
+      "type": "boolean",
+      "description": "False when STEMI on ECG, hemodynamic instability, or another condition bypasses the HEART Score. True when the HEART Score is applicable."
+    },
+    "history_score": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "HEART History component. 0 = slightly suspicious (clearly non-ACS pattern), 1 = moderately suspicious (mixed features), 2 = highly suspicious (typical ACS features)."
+    },
+    "ecg_score": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "HEART ECG component. 0 = normal, 1 = nonspecific repolarization disturbance, 2 = significant ST deviation suggestive of ischemia."
+    },
+    "age_score": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "HEART Age component. 0 = under 45, 1 = 45 to 64, 2 = 65 or older."
+    },
+    "risk_factor_score": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "HEART Risk Factor component. 0 = no recognized risk factors, 1 = 1 to 2 recognized risk factors, 2 = 3 or more risk factors or any known atherosclerotic disease."
+    },
+    "troponin_score": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "HEART Troponin component. 0 = at or below upper limit of normal, 1 = above upper limit of normal up to 3 times upper limit of normal, 2 = greater than 3 times upper limit of normal."
+    },
+    "total_heart_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Sum of all five HEART components (History + ECG + Age + Risk Factors + Troponin)."
+    },
+    "risk_tier": {
+      "type": "string",
+      "enum": ["low", "moderate", "high", "not_applicable"],
+      "description": "Low (score 0-3), moderate (score 4-6), high (score 7-10), or not_applicable when heart_applicable is false."
+    },
+    "recommended_disposition": {
+      "type": "string",
+      "enum": [
+        "early_discharge_consideration",
+        "admit_observation_workup",
+        "admit_invasive_strategy",
+        "emergent_cath_lab"
+      ],
+      "description": "Recommended disposition based on risk tier. emergent_cath_lab only when heart_applicable is false due to STEMI or hemodynamic instability."
+    },
+    "safety_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "troponin_2_with_low_total",
+          "pending_troponin",
+          "incomplete_serial_troponins",
+          "hemodynamic_instability",
+          "consider_alternative_diagnosis_pe"
+        ]
+      },
+      "description": "List of safety concerns. Examples: troponin_2_with_low_total, pending_troponin, incomplete_serial_troponins. Empty array if no safety concerns."
+    },
+    "key_missing_information": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Clinically relevant missing data. Examples: troponin_result, serial_troponins, prior_ecg_for_comparison. Empty array if nothing missing."
+    },
+    "clinician_rationale": {
+      "type": "string",
+      "description": "Brief explanation of the score assignment and disposition reasoning."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+definitions:
+  none: "No meaningful grading failure for the case in the reference run."
+  pack_contradiction: "Specification conflict inside the context pack or policy text."
+  missing_instruction: "Pack/system prompt omitted an instruction needed for stable behavior."
+  policy_ambiguity: "Policy language was underspecified and allowed multiple plausible interpretations."
+  structured_output_fidelity: "Model failed to follow the required structured output contract."
+  true_model_reasoning_error: "Model made a reasoning mistake despite clear policy and labels."
+
+# Historical labels from the initial imperfect run (Run 1).
+labels:
+  case_004: pack_contradiction
+  case_005: pack_contradiction
+  case_009: missing_instruction
+  case_011: policy_ambiguity
+  case_013: missing_instruction
